@@ -1,7 +1,7 @@
-g = 1
-l = 1
-F_D = 1
-Omega_D = 1
+g = 9.8
+l = 9.8
+F_D = 0.5
+Omega_D = 2/3
 theta0 = 0.2
-omega0 = 0
+omega0 = 0.0
 q = 0.5
