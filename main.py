@@ -1,5 +1,6 @@
 from Pendulum import*
 import matplotlib.pyplot as plt
+import poincare
 
 """
 pendel = Pendulum.with_rk4(stop=60, step=0.01)
@@ -12,14 +13,9 @@ plt.plot(t2, theta2)
 plt.show()
 """
 
-STEP=0.01
 
-t, theta, omega = Pendulum.with_euler_cromer(stop=40000, step=STEP)(F_D=1.2)
-thetap, omegap = [], []
-for i, t_i in enumerate(t):
-    if abs(t_i%(2*np.pi/params.Omega_D))<STEP:
-        thetap.append(theta[i])
-        omegap.append(omega[i])
+t, theta, omega = Pendulum.with_euler_cromer(stop=500000, step=0.1)(F_D=1.2)
+theta, omega = poincare.section(t, theta, omega, 2*np.pi/params.Omega_D)
 
-plt.plot(thetap, omegap, 'b.')
+plt.plot(theta, omega, 'b.')
 plt.show()
