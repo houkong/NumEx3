@@ -52,7 +52,7 @@ plt.clf()
 
 
 # Demonstration that chaotic behaviour is also manifested in that different numerical solvers
-# yields completely different trajectories for F_D =1.2
+# yields completely different trajectories for F_D = 1.2
 t1, theta1, _ = Pendulum.with_euler_cromer(stop=60, step=0.001)(F_D=1.2)
 t2, theta2, _ = Pendulum.with_rk4(stop=60, step=0.001)(F_D=1.2)
 t3, theta3, _ = Pendulum.with_simple_euler(stop=60, step=0.001)(F_D=1.2)
