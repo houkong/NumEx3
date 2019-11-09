@@ -64,8 +64,3 @@ plt.xlabel("t [s]")
 plt.ylabel("θ [rad]")
 plt.legend()
 plt.savefig("plots\different_num_methods.png")
-
-
-
-
-
