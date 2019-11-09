@@ -100,3 +100,11 @@ class Pendulum:
         t, theta, omega = self.__call__(**kwargs)
         return poincare.section(t, theta, omega, 2*np.pi/self.params["Omega_D"])
 
+    def lyapunov(self, initial_angular_difference, **kwargs):
+        theta0 = self.params["theta0"]
+        t, theta1, _ = self.__call__(**kwargs, theta0=theta0 + initial_angular_difference/2 )
+        _, theta2, _ = self.__call__(**kwargs, theta0=theta0 - initial_angular_difference/2 )
+        self.params["theta0"] = theta0
+        return t, theta2 - theta1
+
+

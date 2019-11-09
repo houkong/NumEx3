@@ -1,6 +1,5 @@
 from Pendulum import*
 import matplotlib.pyplot as plt
-import poincare
 import os
 if not os.path.exists("plots"):
     os.mkdir("plots")
@@ -25,14 +24,24 @@ plt.savefig("plots\exercise1.png")
 plt.clf()
 
 
+# Exercise two
+pendulum = Pendulum.with_rk4(stop=75, step=0.005)
+t, delta_theta = pendulum.lyapunov(0.001, F_D=0.5)
+plt.plot(t, np.log(delta_theta), label="F_D = 0.5")
+t, delta_theta = pendulum.lyapunov(0.001, F_D=1.2)
+plt.plot(t, np.log(delta_theta), label="F_D = 1.2")
+plt.xlabel("t [s]")
+plt.ylabel("ln(Δθ) [ln(rad)]")
+plt.legend()
+plt.savefig("plots\lyapunov.png")
+plt.clf()
+
 # Exercise three
 pendulum = Pendulum.with_euler_cromer(stop=10000, step=0.1)
 theta1, omega1 = pendulum.poincare_section(F_D=0.5)
 theta2, omega2 = pendulum.poincare_section(F_D=1.2)
 
-
 plt.plot(theta1, omega1, 'b.')
-
 plt.plot(theta1, omega1, 'b.', label="F_D = 0.5")
 plt.plot(theta2, omega2, 'r.', label="F_D = 1.2")
 plt.xlabel("θ [rad]")
@@ -41,9 +50,9 @@ plt.legend()
 plt.savefig("plots\poincaresection.png")
 plt.clf()
 
+
 # Demonstration that chaotic behaviour is also manifested in that different numerical solvers
 # yields completely different trajectories for F_D =1.2
-
 t1, theta1, _ = Pendulum.with_euler_cromer(stop=60, step=0.001)(F_D=1.2)
 t2, theta2, _ = Pendulum.with_rk4(stop=60, step=0.001)(F_D=1.2)
 t3, theta3, _ = Pendulum.with_simple_euler(stop=60, step=0.001)(F_D=1.2)

@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def section(t, _theta, _omega, mod):
     n = len(t)
     tol = t[1]-t[0]
