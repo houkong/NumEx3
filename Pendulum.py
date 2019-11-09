@@ -1,6 +1,6 @@
 import numpy as np
 import params
-
+import poincare
 
 class Pendulum:
     def __init__(self, method, stop=100, step=0.01):
@@ -95,3 +95,8 @@ class Pendulum:
             return Pendulum.reduce_angle(alpha + 2 * np.pi)
         else:
             return alpha
+
+    def poincare_section(self, **kwargs):
+        t, theta, omega = self.__call__(**kwargs)
+        return poincare.section(t, theta, omega, 2*np.pi/self.params["Omega_D"])
+
