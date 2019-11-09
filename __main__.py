@@ -36,6 +36,7 @@ plt.legend()
 plt.savefig("plots\lyapunov.png")
 plt.clf()
 
+
 # Exercise three
 pendulum = Pendulum.with_euler_cromer(stop=10000, step=0.1)
 theta1, omega1 = pendulum.poincare_section(F_D=0.5)
